@@ -1,0 +1,44 @@
+<ion-grid>
+	<ion-row>
+	  <ion-col col-6 *ngFor="let p of pages.menus.items" [ngClass]="p.extra_classes">
+		  <ion-card (click)="pushPage(p)" class="menu-card">
+		    <div class="card-title"><ion-icon *ngIf="p.class" name="{{p.class}}"></ion-icon></div>
+		    <div class="card-subtitle">{{p.title}}</div>
+		  </ion-card>
+	  </ion-col>
+	</ion-row>
+</ion-grid>
+
+import { ActionSheetController } from 'ionic-angular';
+
+export class MyPage {
+  constructor(public actionSheetCtrl: ActionSheetController) {
+  }
+
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Modify your album',
+      buttons: [
+        {
+          text: 'Destructive',
+          role: 'destructive',
+          handler: () => {
+            console.log('Destructive clicked');
+          }
+        },{
+          text: 'Archive',
+          handler: () => {
+            console.log('Archive clicked');
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+}
